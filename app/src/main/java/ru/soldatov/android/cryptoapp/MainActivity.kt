@@ -18,8 +18,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel.loadData()
-        viewModel.priceList.observe(this){
+//        viewModel.priceList.observe(this){
+//            Log.d("MainActivity", it.toString())
+//        }
+        viewModel.getDetailInfo("BTC").observe(this) {
             Log.d("MainActivity", it.toString())
         }
     }

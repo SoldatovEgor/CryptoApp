@@ -4,6 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import ru.soldatov.android.cryptoapp.api.ApiFactory.BASE_IMG_URL
+import ru.soldatov.android.cryptoapp.utils.converterTimestampToTime
 
 @Entity(tableName = "full_price_list")
 data class CoinPriceInfo(
@@ -28,7 +30,7 @@ data class CoinPriceInfo(
     val price: Double?,
     @SerializedName("LASTUPDATE")
     @Expose
-    val lastUpdate: Int?,
+    val lastUpdate: Long?,
     @SerializedName("MEDIAN")
     @Expose
     val median: Double?,
@@ -149,4 +151,11 @@ data class CoinPriceInfo(
     @SerializedName("IMAGEURL")
     @Expose
     val imageUrl: String?
-)
+) {
+    fun getFormattedTime(): String {
+        return converterTimestampToTime(lastUpdate)
+    }
+    fun getFullImageUrl(): String {
+        return BASE_IMG_URL + imageUrl
+    }
+}

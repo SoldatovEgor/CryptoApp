@@ -30,8 +30,8 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun loadData() {
-        val disposable = ApiFactory.apiServer.getTopCoinsInfo(limit = 50)
-            .map { it.data?.map { it.coinInfo?.name }?.joinToString(", ") }
+        val disposable = ApiFactory.apiServer.getTopCoinsInfo()
+            .map { it.data?.map { it.coinInfo?.name }?.joinToString(",") }
             .flatMap { ApiFactory.apiServer.getFullPriceList(fSyms = it) }
             .map { getPriceListFromRowData(it) }
             .delaySubscription(10, TimeUnit.SECONDS)
@@ -39,11 +39,13 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
             .retry()
             .subscribeOn(Schedulers.io())
             .subscribe({
+                db.coinPriceInfoDao().deletePriceList()
                 db.coinPriceInfoDao().insertPriceList(it)
-                Log.d("TEST_MAIN_ACTIVITY", it.toString())
+                Log.d("TEST_MAIN_ACTIVITY", it.size.toString())
             }, {
                 Log.d("TEST_MAIN_ACTIVITY", it.message!!)
             })
+        compositeDisposable.add(disposable)
     }
 
     private fun getPriceListFromRowData(
@@ -55,12 +57,12 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
         for (coinKey in coinKeySet) {
             val currencyJson = jsonObject.getAsJsonObject(coinKey)
             val currencyKeySet = currencyJson.keySet()
-            for (currency in currencyKeySet) {
-                val coinInfo = Gson().fromJson(
-                    currencyJson.getAsJsonObject(currency),
+            for (currencyKey in currencyKeySet) {
+                val priceInfo = Gson().fromJson(
+                    currencyJson.getAsJsonObject(currencyKey),
                     CoinPriceInfo::class.java
                 )
-                result.add(coinInfo)
+                result.add(priceInfo)
             }
         }
         return result

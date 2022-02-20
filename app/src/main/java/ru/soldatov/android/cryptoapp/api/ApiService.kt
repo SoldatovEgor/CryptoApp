@@ -10,14 +10,14 @@ interface ApiService {
 
     @GET("top/totalvolfull")
     fun getTopCoinsInfo(
-        @Query(QUERY_API_KEY) apyKey: String = API_KEY,
+        @Query(QUERY_API_KEY) apyKey: String = "",
         @Query(QUERY_LIMIT) limit: Int = LIMIT,
         @Query(QUERY_TO_SYMBOL) tSym: String = CURRENCY_SYMBOL
     ) : Single<CoinInfoListOfData>
 
     @GET("pricemultifull")
     fun getFullPriceList(
-        @Query(QUERY_API_KEY) apyKey: String = API_KEY,
+        @Query(QUERY_API_KEY) apyKey: String = "",
         @Query(QUERY_FROM_SYMBOLS) fSyms: String,
         @Query(QUERY_TO_SYMBOLS) tSyms: String = CURRENCY_SYMBOL
     ): Single<CoinPriceInfoRawData>

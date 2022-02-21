@@ -46,9 +46,9 @@ class CoinInfoAdapter(private val context: Context)
             tvPrice.text = coin.price.toString()
             tvLastUpdate.text = String.format(
                 context.resources.getString(R.string.last_update_template),
-                converterTimestampToTime(coin.lastUpdate)
+                coin.lastUpdate
             )
-            Picasso.get().load(ApiFactory.BASE_IMG_URL + coin.imageUrl).into(ivLogoCoin)
+            Picasso.get().load(coin.imageUrl).into(ivLogoCoin)
         }
         binding.root.setOnClickListener {
             coinItemClickListener?.invoke(coin)

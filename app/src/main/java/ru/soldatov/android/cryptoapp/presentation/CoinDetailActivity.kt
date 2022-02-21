@@ -7,10 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import ru.soldatov.android.cryptoapp.databinding.ActivityCoinDetailBinding
-import ru.soldatov.android.cryptoapp.data.database.CoinInfoDBModel
-import ru.soldatov.android.cryptoapp.data.network.ApiFactory
 import ru.soldatov.android.cryptoapp.domain.CoinInfo
-import ru.soldatov.android.cryptoapp.utils.converterTimestampToTime
 
 class CoinDetailActivity : AppCompatActivity() {
 
@@ -39,14 +36,14 @@ class CoinDetailActivity : AppCompatActivity() {
 
     private fun initViews(coinInfo: CoinInfo) {
         with(binding) {
-            Picasso.get().load(ApiFactory.BASE_IMG_URL + coinInfo.imageUrl).into(ivLogoCoin)
+            Picasso.get().load(coinInfo.imageUrl).into(ivLogoCoin)
             tvFromSymbol.text = coinInfo.fromSymbol
             tvToSymbol.text = coinInfo.toSymbol
             tvPrice.text = coinInfo.price
             tvMinPrice.text = coinInfo.lowDay
             tvMaxPrice.text = coinInfo.highDay
             tvLastMarket.text = coinInfo.lastMarket
-            tvLastUpdate.text = converterTimestampToTime(coinInfo.lastUpdate)
+            tvLastUpdate.text = coinInfo.lastUpdate
             tvFromSymbol.text = coinInfo.fromSymbol
             tvToSymbol.text = coinInfo.toSymbol
         }

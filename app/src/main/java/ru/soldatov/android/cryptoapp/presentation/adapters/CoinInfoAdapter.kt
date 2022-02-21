@@ -7,13 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.soldatov.android.cryptoapp.R
-import ru.soldatov.android.cryptoapp.data.network.ApiFactory
 import ru.soldatov.android.cryptoapp.databinding.ItemCoinInfoBinding
 import ru.soldatov.android.cryptoapp.domain.CoinInfo
-import ru.soldatov.android.cryptoapp.utils.converterTimestampToTime
 
 class CoinInfoAdapter(private val context: Context)
-    : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
+    : RecyclerView.Adapter<CoinInfoViewHolder>() {
 
     var coinItemClickListener: ((CoinInfo) -> Unit)? = null
 
@@ -57,7 +55,5 @@ class CoinInfoAdapter(private val context: Context)
 
     override fun getItemCount() = coinInfoList.size
 
-    inner class CoinInfoViewHolder(val binding: ItemCoinInfoBinding)
-        : RecyclerView.ViewHolder(binding.root)
 
 }

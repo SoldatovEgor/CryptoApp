@@ -11,7 +11,9 @@ import ru.soldatov.android.cryptoapp.domain.CoinInfo
 
 class CoinDetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityCoinDetailBinding
+    private val binding by lazy {
+        ActivityCoinDetailBinding.inflate(layoutInflater)
+    }
 
     private val viewModel: CoinViewModel by lazy {
         ViewModelProvider(
@@ -22,7 +24,6 @@ class CoinDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCoinDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (!intent.hasExtra(EXTRA_FROM_SYMBOL)) {
             finish()

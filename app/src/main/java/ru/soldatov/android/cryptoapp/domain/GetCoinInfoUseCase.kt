@@ -1,6 +1,6 @@
 package ru.soldatov.android.cryptoapp.domain
 
-class CoinInfoUseCase(
+class GetCoinInfoUseCase(
     private val repository: CoinInfoRepository
 ) {
 

@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import ru.soldatov.android.cryptoapp.databinding.ActivityCoinDetailBinding
 import ru.soldatov.android.cryptoapp.data.database.CoinInfoDBModel
+import ru.soldatov.android.cryptoapp.data.network.ApiFactory
+import ru.soldatov.android.cryptoapp.domain.CoinInfo
+import ru.soldatov.android.cryptoapp.utils.converterTimestampToTime
 
 class CoinDetailActivity : AppCompatActivity() {
 
@@ -34,18 +37,18 @@ class CoinDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun initViews(coinPriceInfo: CoinInfoDBModel) {
+    private fun initViews(coinInfo: CoinInfo) {
         with(binding) {
-            Picasso.get().load(coinPriceInfo.getFullImageUrl()).into(ivLogoCoin)
-            tvFromSymbol.text = coinPriceInfo.fromSymbol
-            tvToSymbol.text = coinPriceInfo.toSymbol
-            tvPrice.text = coinPriceInfo.price
-            tvMinPrice.text = coinPriceInfo.lowDay
-            tvMaxPrice.text = coinPriceInfo.highDay
-            tvLastMarket.text = coinPriceInfo.lastMarket
-            tvLastUpdate.text = coinPriceInfo.getFormattedTime()
-            tvFromSymbol.text = coinPriceInfo.fromSymbol
-            tvToSymbol.text = coinPriceInfo.toSymbol
+            Picasso.get().load(ApiFactory.BASE_IMG_URL + coinInfo.imageUrl).into(ivLogoCoin)
+            tvFromSymbol.text = coinInfo.fromSymbol
+            tvToSymbol.text = coinInfo.toSymbol
+            tvPrice.text = coinInfo.price
+            tvMinPrice.text = coinInfo.lowDay
+            tvMaxPrice.text = coinInfo.highDay
+            tvLastMarket.text = coinInfo.lastMarket
+            tvLastUpdate.text = converterTimestampToTime(coinInfo.lastUpdate)
+            tvFromSymbol.text = coinInfo.fromSymbol
+            tvToSymbol.text = coinInfo.toSymbol
         }
     }
 
@@ -53,9 +56,9 @@ class CoinDetailActivity : AppCompatActivity() {
 
         private const val EXTRA_FROM_SYMBOL = "fSym"
 
-        fun newIntent(context: Context, coinPriceInfo: CoinInfoDBModel): Intent {
+        fun newIntent(context: Context, coinInfo: CoinInfo): Intent {
             return Intent(context, CoinDetailActivity::class.java).apply {
-                putExtra(EXTRA_FROM_SYMBOL, coinPriceInfo.fromSymbol)
+                putExtra(EXTRA_FROM_SYMBOL, coinInfo.fromSymbol)
             }
         }
     }

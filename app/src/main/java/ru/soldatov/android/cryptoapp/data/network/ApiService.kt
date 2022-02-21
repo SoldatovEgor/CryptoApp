@@ -1,23 +1,22 @@
 package ru.soldatov.android.cryptoapp.data.network
 
-import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.soldatov.android.cryptoapp.data.network.models.CoinListNamesDto
 import ru.soldatov.android.cryptoapp.data.network.models.CoinInfoJsonObjectDto
+import ru.soldatov.android.cryptoapp.data.network.models.CoinListNamesDto
 
 interface ApiService {
 
     @GET("top/totalvolfull")
-    fun getTopCoinsInfo(
-        @Query(QUERY_API_KEY) apyKey: String = "",
+    suspend fun getTopCoinsInfo(
+        @Query(QUERY_API_KEY) apyKey: String = API_KEY,
         @Query(QUERY_LIMIT) limit: Int = LIMIT,
         @Query(QUERY_TO_SYMBOL) tSym: String = CURRENCY_SYMBOL
     ) : CoinListNamesDto
 
     @GET("pricemultifull")
-    fun getFullPriceList(
-        @Query(QUERY_API_KEY) apyKey: String = "",
+    suspend fun getFullPriceList(
+        @Query(QUERY_API_KEY) apyKey: String = API_KEY,
         @Query(QUERY_FROM_SYMBOLS) fSyms: String,
         @Query(QUERY_TO_SYMBOLS) tSyms: String = CURRENCY_SYMBOL
     ): CoinInfoJsonObjectDto

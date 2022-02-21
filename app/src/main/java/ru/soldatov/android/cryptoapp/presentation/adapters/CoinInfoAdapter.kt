@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.soldatov.android.cryptoapp.R
+import ru.soldatov.android.cryptoapp.data.network.ApiFactory
 import ru.soldatov.android.cryptoapp.databinding.ItemCoinInfoBinding
-import ru.soldatov.android.cryptoapp.data.database.CoinInfoDBModel
+import ru.soldatov.android.cryptoapp.domain.CoinInfo
+import ru.soldatov.android.cryptoapp.utils.converterTimestampToTime
 
 class CoinInfoAdapter(private val context: Context)
     : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
-    var coinItemClickListener: ((CoinInfoDBModel) -> Unit)? = null
+    var coinItemClickListener: ((CoinInfo) -> Unit)? = null
 
-    var coinInfoList = listOf<CoinInfoDBModel>()
+    var coinInfoList = listOf<CoinInfo>()
         set (value) {
             field = value
             notifyDataSetChanged()
@@ -44,9 +46,9 @@ class CoinInfoAdapter(private val context: Context)
             tvPrice.text = coin.price.toString()
             tvLastUpdate.text = String.format(
                 context.resources.getString(R.string.last_update_template),
-                coin.getFormattedTime()
+                converterTimestampToTime(coin.lastUpdate)
             )
-            Picasso.get().load(coin.getFullImageUrl()).into(ivLogoCoin)
+            Picasso.get().load(ApiFactory.BASE_IMG_URL + coin.imageUrl).into(ivLogoCoin)
         }
         binding.root.setOnClickListener {
             coinItemClickListener?.invoke(coin)

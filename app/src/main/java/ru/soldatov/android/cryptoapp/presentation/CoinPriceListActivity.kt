@@ -25,8 +25,8 @@ class CoinPriceListActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupRecyclerView()
-        viewModel.priceList.observe(this){
-            Log.d("MainAct", it.size.toString())
+        viewModel.coinInfoList.observe(this){
+            Log.d("CoinPriceListActivity", it.size.toString())
             adapter.coinInfoList = it
         }
     }

@@ -1,6 +1,7 @@
 package ru.soldatov.android.cryptoapp.data.repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import kotlinx.coroutines.delay
@@ -9,6 +10,7 @@ import ru.soldatov.android.cryptoapp.data.mapper.CoinMapper
 import ru.soldatov.android.cryptoapp.data.network.ApiFactory
 import ru.soldatov.android.cryptoapp.domain.CoinInfo
 import ru.soldatov.android.cryptoapp.domain.CoinInfoRepository
+import java.lang.Exception
 
 class CoinRepositoryImpl(application: Application)
     : CoinInfoRepository {
@@ -34,12 +36,16 @@ class CoinRepositoryImpl(application: Application)
 
     override suspend fun loadData() {
         while (true) {
-            val topCoins = apiService.getTopCoinsInfo(limit = 50)
-            val fSyms = mapper.mapNamesListToString(topCoins)
-            val jsonContainer = apiService.getFullPriceList(fSyms = fSyms)
-            val coinInfoDtoList = mapper.mapJsonContainerToListCoinInfo(jsonContainer)
-            val coinInfoList = coinInfoDtoList.map { mapper.mapDtoToDBModel(it) }
-            coinInfoDao.insertPriceList(coinInfoList)
+            try {
+                val topCoins = apiService.getTopCoinsInfo(limit = 50)
+                val fSyms = mapper.mapNamesListToString(topCoins)
+                val jsonContainer = apiService.getFullPriceList(fSyms = fSyms)
+                val coinInfoDtoList = mapper.mapJsonContainerToListCoinInfo(jsonContainer)
+                val coinInfoList = coinInfoDtoList.map { mapper.mapDtoToDBModel(it) }
+                coinInfoDao.insertPriceList(coinInfoList)
+            } catch (e: Exception) {
+
+            }
             delay(10000)
         }
     }

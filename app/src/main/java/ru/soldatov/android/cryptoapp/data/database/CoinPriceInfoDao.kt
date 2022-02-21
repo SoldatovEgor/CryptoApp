@@ -16,9 +16,6 @@ interface CoinPriceInfoDao {
     fun getPrice(fSym: String): LiveData<CoinInfoDBModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPriceList(priceList: List<CoinInfoDBModel>)
-
-    @Query("DELETE FROM full_price_list")
-    fun deletePriceList()
+    suspend fun insertPriceList(priceList: List<CoinInfoDBModel>)
 
 }

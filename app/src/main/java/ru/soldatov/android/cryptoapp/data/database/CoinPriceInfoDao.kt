@@ -5,19 +5,18 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import ru.soldatov.android.cryptoapp.data.models.CoinPriceInfo
 
 @Dao
 interface CoinPriceInfoDao {
 
     @Query("SELECT * FROM full_price_list ORDER BY lastUpdate DESC")
-    fun getPriceList(): LiveData<List<CoinPriceInfo>>
+    fun getPriceList(): LiveData<List<CoinInfoDBModel>>
 
     @Query("SELECT * FROM full_price_list WHERE fromSymbol == :fSym LIMIT 1")
-    fun getPrice(fSym: String): LiveData<CoinPriceInfo>
+    fun getPrice(fSym: String): LiveData<CoinInfoDBModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPriceList(priceList: List<CoinPriceInfo>)
+    fun insertPriceList(priceList: List<CoinInfoDBModel>)
 
     @Query("DELETE FROM full_price_list")
     fun deletePriceList()

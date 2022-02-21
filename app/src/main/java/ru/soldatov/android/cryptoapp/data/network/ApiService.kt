@@ -3,8 +3,8 @@ package ru.soldatov.android.cryptoapp.data.network
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.soldatov.android.cryptoapp.data.models.CoinInfoListOfData
-import ru.soldatov.android.cryptoapp.data.models.CoinPriceInfoRawData
+import ru.soldatov.android.cryptoapp.data.network.models.CoinListNamesDto
+import ru.soldatov.android.cryptoapp.data.network.models.CoinInfoJsonObjectDto
 
 interface ApiService {
 
@@ -13,14 +13,14 @@ interface ApiService {
         @Query(QUERY_API_KEY) apyKey: String = "",
         @Query(QUERY_LIMIT) limit: Int = LIMIT,
         @Query(QUERY_TO_SYMBOL) tSym: String = CURRENCY_SYMBOL
-    ) : Single<CoinInfoListOfData>
+    ) : CoinListNamesDto
 
     @GET("pricemultifull")
     fun getFullPriceList(
         @Query(QUERY_API_KEY) apyKey: String = "",
         @Query(QUERY_FROM_SYMBOLS) fSyms: String,
         @Query(QUERY_TO_SYMBOLS) tSyms: String = CURRENCY_SYMBOL
-    ): Single<CoinPriceInfoRawData>
+    ): CoinInfoJsonObjectDto
 
     companion object {
 

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import ru.soldatov.android.cryptoapp.databinding.ActivityCoinDetailBinding
-import ru.soldatov.android.cryptoapp.data.models.CoinPriceInfo
+import ru.soldatov.android.cryptoapp.data.database.CoinInfoDBModel
 
 class CoinDetailActivity : AppCompatActivity() {
 
@@ -34,7 +34,7 @@ class CoinDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun initViews(coinPriceInfo: CoinPriceInfo) {
+    private fun initViews(coinPriceInfo: CoinInfoDBModel) {
         with(binding) {
             Picasso.get().load(coinPriceInfo.getFullImageUrl()).into(ivLogoCoin)
             tvFromSymbol.text = coinPriceInfo.fromSymbol
@@ -53,7 +53,7 @@ class CoinDetailActivity : AppCompatActivity() {
 
         private const val EXTRA_FROM_SYMBOL = "fSym"
 
-        fun newIntent(context: Context, coinPriceInfo: CoinPriceInfo): Intent {
+        fun newIntent(context: Context, coinPriceInfo: CoinInfoDBModel): Intent {
             return Intent(context, CoinDetailActivity::class.java).apply {
                 putExtra(EXTRA_FROM_SYMBOL, coinPriceInfo.fromSymbol)
             }

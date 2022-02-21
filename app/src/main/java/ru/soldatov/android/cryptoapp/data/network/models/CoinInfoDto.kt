@@ -1,4 +1,4 @@
-package ru.soldatov.android.cryptoapp.data.models
+package ru.soldatov.android.cryptoapp.data.network.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,7 +8,7 @@ import ru.soldatov.android.cryptoapp.data.network.ApiFactory.BASE_IMG_URL
 import ru.soldatov.android.cryptoapp.utils.converterTimestampToTime
 
 @Entity(tableName = "full_price_list")
-data class CoinPriceInfo(
+data class CoinInfoDto(
     @SerializedName("TYPE")
     @Expose
     val type: String?,

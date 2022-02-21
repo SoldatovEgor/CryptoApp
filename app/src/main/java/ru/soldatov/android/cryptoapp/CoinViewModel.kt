@@ -39,7 +39,6 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
             .retry()
             .subscribeOn(Schedulers.io())
             .subscribe({
-                db.coinPriceInfoDao().deletePriceList()
                 db.coinPriceInfoDao().insertPriceList(it)
                 Log.d("TEST_MAIN_ACTIVITY", it.size.toString())
             }, {

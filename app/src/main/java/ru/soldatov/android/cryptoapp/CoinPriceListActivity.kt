@@ -39,7 +39,8 @@ class CoinPriceListActivity : AppCompatActivity() {
 
     private fun setupClickListener() {
         adapter.coinItemClickListener = {
-            Log.d("ClickListener", it.fromSymbol)
+            val intent = CoinDetailActivity.newIntent(this, it)
+            startActivity(intent)
         }
     }
 

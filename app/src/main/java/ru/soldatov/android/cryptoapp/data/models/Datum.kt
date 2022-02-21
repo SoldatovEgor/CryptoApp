@@ -1,4 +1,4 @@
-package ru.soldatov.android.cryptoapp.pojo
+package ru.soldatov.android.cryptoapp.data.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

@@ -1,10 +1,10 @@
-package ru.soldatov.android.cryptoapp.api
+package ru.soldatov.android.cryptoapp.data.network
 
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.soldatov.android.cryptoapp.pojo.CoinInfoListOfData
-import ru.soldatov.android.cryptoapp.pojo.CoinPriceInfoRawData
+import ru.soldatov.android.cryptoapp.data.models.CoinInfoListOfData
+import ru.soldatov.android.cryptoapp.data.models.CoinPriceInfoRawData
 
 interface ApiService {
 

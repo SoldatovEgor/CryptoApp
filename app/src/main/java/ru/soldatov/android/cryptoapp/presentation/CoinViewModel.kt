@@ -1,4 +1,4 @@
-package ru.soldatov.android.cryptoapp
+package ru.soldatov.android.cryptoapp.presentation
 
 import android.app.Application
 import android.util.Log
@@ -7,10 +7,10 @@ import androidx.lifecycle.LiveData
 import com.google.gson.Gson
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import ru.soldatov.android.cryptoapp.api.ApiFactory
-import ru.soldatov.android.cryptoapp.database.AppDatabase
-import ru.soldatov.android.cryptoapp.pojo.CoinPriceInfo
-import ru.soldatov.android.cryptoapp.pojo.CoinPriceInfoRawData
+import ru.soldatov.android.cryptoapp.data.network.ApiFactory
+import ru.soldatov.android.cryptoapp.data.database.AppDatabase
+import ru.soldatov.android.cryptoapp.data.models.CoinPriceInfo
+import ru.soldatov.android.cryptoapp.data.models.CoinPriceInfoRawData
 import java.util.*
 import java.util.concurrent.TimeUnit
 

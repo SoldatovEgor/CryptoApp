@@ -1,11 +1,11 @@
-package ru.soldatov.android.cryptoapp
+package ru.soldatov.android.cryptoapp.presentation
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
-import ru.soldatov.android.cryptoapp.adapters.CoinInfoAdapter
+import ru.soldatov.android.cryptoapp.presentation.adapters.CoinInfoAdapter
 import ru.soldatov.android.cryptoapp.databinding.ActivityMainBinding
 
 class CoinPriceListActivity : AppCompatActivity() {

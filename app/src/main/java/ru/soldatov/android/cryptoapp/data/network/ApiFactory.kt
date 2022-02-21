@@ -1,4 +1,4 @@
-package ru.soldatov.android.cryptoapp.api
+package ru.soldatov.android.cryptoapp.data.network
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

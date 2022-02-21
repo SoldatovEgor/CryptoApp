@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoApp">
         <activity
-            android:name=".CoinPriceListActivity"
+            android:name=".presentation.CoinPriceListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CoinDetailActivity" />
+        <activity android:name=".presentation.CoinDetailActivity" />
     </application>
 
 </manifest>

@@ -29,13 +29,14 @@ class CoinPriceListActivity : AppCompatActivity() {
         setupRecyclerView()
         viewModel.coinInfoList.observe(this){
             Log.d("CoinPriceListActivity", it.size.toString())
-            adapter.coinInfoList = it
+            adapter.submitList(it)
         }
     }
 
     private fun setupRecyclerView() {
         adapter = CoinInfoAdapter(this)
         binding.rvCoinPriceList.adapter = adapter
+        binding.rvCoinPriceList.itemAnimator = null
         setupClickListener()
     }
 

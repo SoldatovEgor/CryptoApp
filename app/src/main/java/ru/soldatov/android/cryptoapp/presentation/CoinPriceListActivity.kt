@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
+import ru.soldatov.android.cryptoapp.R
 import ru.soldatov.android.cryptoapp.databinding.ActivityCoinPriceListBinding
 import ru.soldatov.android.cryptoapp.presentation.adapters.CoinInfoAdapter
 
@@ -33,6 +34,22 @@ class CoinPriceListActivity : AppCompatActivity() {
         }
     }
 
+    private fun launchActivity(fromSymbol: String) {
+        val intent = CoinDetailActivity.newIntent(this, fromSymbol)
+        startActivity(intent)
+    }
+
+    private fun launchFragment(fromSymbol: String) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, CoinDetailFragment.newInstance(fromSymbol))
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun isOnePaneMode() = binding.fragmentContainer == null
+
     private fun setupRecyclerView() {
         adapter = CoinInfoAdapter(this)
         binding.rvCoinPriceList.adapter = adapter
@@ -42,8 +59,11 @@ class CoinPriceListActivity : AppCompatActivity() {
 
     private fun setupClickListener() {
         adapter.coinItemClickListener = {
-            val intent = CoinDetailActivity.newIntent(this, it)
-            startActivity(intent)
+            if (isOnePaneMode()) {
+                launchActivity(it.fromSymbol)
+            } else {
+                launchFragment(it.fromSymbol)
+            }
         }
     }
 

@@ -1,25 +1,11 @@
 package ru.soldatov.android.cryptoapp.presentation
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
-import ru.soldatov.android.cryptoapp.data.network.ApiFactory
-import ru.soldatov.android.cryptoapp.data.database.AppDatabase
-import ru.soldatov.android.cryptoapp.data.database.CoinInfoDBModel
-import ru.soldatov.android.cryptoapp.data.network.models.CoinInfoJsonObjectDto
 import ru.soldatov.android.cryptoapp.data.repository.CoinRepositoryImpl
-import ru.soldatov.android.cryptoapp.domain.CoinInfoRepository
 import ru.soldatov.android.cryptoapp.domain.GetCoinInfoListUseCase
 import ru.soldatov.android.cryptoapp.domain.GetCoinInfoUseCase
 import ru.soldatov.android.cryptoapp.domain.LoadDataUseCase
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -34,8 +20,6 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
     fun getDetailInfo(fSym: String) = getCoinInfoUseCase(fromSymbol = fSym)
 
     init {
-        viewModelScope.launch {
-            loadDataUseCase()
-        }
+        loadDataUseCase()
     }
 }

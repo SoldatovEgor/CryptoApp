@@ -9,8 +9,9 @@ import ru.soldatov.android.cryptoapp.domain.CoinInfo
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class CoinMapper {
+class CoinMapper @Inject constructor() {
 
     fun mapDtoToDBModel(dto: CoinInfoDto): CoinInfoDBModel {
         return CoinInfoDBModel(

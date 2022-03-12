@@ -8,25 +8,30 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import ru.soldatov.android.cryptoapp.R
 import ru.soldatov.android.cryptoapp.databinding.ActivityCoinPriceListBinding
 import ru.soldatov.android.cryptoapp.presentation.adapters.CoinInfoAdapter
+import javax.inject.Inject
 
 class CoinPriceListActivity : AppCompatActivity() {
 
     private lateinit var adapter: CoinInfoAdapter
 
+    @Inject
+    lateinit var viewModelProvider: ViewModelFactory
+
     private val binding by lazy {
         ActivityCoinPriceListBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: CoinViewModel by lazy {
-        ViewModelProvider(
-            this,
-            AndroidViewModelFactory.getInstance(application)
-        )[CoinViewModel::class.java]
+    private val component by lazy {
+        (application as CoinApp).component
     }
 
+    private lateinit var viewModel: CoinViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this, viewModelProvider)[CoinViewModel::class.java]
         setupRecyclerView()
         viewModel.coinInfoList.observe(this){
             Log.d("CoinPriceListActivity", it.size.toString())

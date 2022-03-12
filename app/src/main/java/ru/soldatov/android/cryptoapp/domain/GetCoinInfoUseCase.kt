@@ -1,6 +1,8 @@
 package ru.soldatov.android.cryptoapp.domain
 
-class GetCoinInfoUseCase(
+import javax.inject.Inject
+
+class GetCoinInfoUseCase @Inject constructor(
     private val repository: CoinInfoRepository
 ) {
 

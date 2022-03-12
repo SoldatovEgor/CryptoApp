@@ -1,19 +1,16 @@
 package ru.soldatov.android.cryptoapp.presentation
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import ru.soldatov.android.cryptoapp.data.repository.CoinRepositoryImpl
+import androidx.lifecycle.ViewModel
 import ru.soldatov.android.cryptoapp.domain.GetCoinInfoListUseCase
 import ru.soldatov.android.cryptoapp.domain.GetCoinInfoUseCase
 import ru.soldatov.android.cryptoapp.domain.LoadDataUseCase
+import javax.inject.Inject
 
-class CoinViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository = CoinRepositoryImpl(application)
-
-    private val getCoinInfoListUseCase = GetCoinInfoListUseCase(repository)
-    private val getCoinInfoUseCase = GetCoinInfoUseCase(repository)
-    private val loadDataUseCase = LoadDataUseCase(repository)
+class CoinViewModel @Inject constructor(
+    private val getCoinInfoListUseCase: GetCoinInfoListUseCase,
+    private val getCoinInfoUseCase: GetCoinInfoUseCase,
+    private val loadDataUseCase: LoadDataUseCase
+) : ViewModel() {
 
     val coinInfoList = getCoinInfoListUseCase()
 
